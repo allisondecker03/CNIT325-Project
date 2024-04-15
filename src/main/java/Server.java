@@ -21,6 +21,7 @@ public class Server {
         try {
             // Assign server socket to a port
             serverSocket = new ServerSocket(PORT_NUMBER);
+            System.out.println("Server started!");
         } catch (Exception e) {
             // TODO: Better handling
             e.printStackTrace();
@@ -28,9 +29,11 @@ public class Server {
         }
 
         while (true) {
+            System.out.println("Waiting for a connection...");
             // Accept connection from client
-            try (Socket s = serverSocket.accept()) {
-                Thread thread = new Thread(new ClientHandler(s.getInputStream(), s.getOutputStream()));
+            try {
+                System.out.println("Received connection from client");
+                Thread thread = new Thread(new ClientHandler(serverSocket.accept()));
                 thread.start();
             } catch (IOException e) {
                 // TODO: Better handling
