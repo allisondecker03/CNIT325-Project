@@ -53,4 +53,20 @@ public class FirebaseUtilities {
 	public static void createNewUser(HashMap<String, String> newUserData) {
 		db.collection("USER").document().set(newUserData);
 	}
+	
+	public static boolean userExists(String username, String password) {
+		ApiFuture<QuerySnapshot> snapshot = db.collection("USER").get();
+		try {
+			QuerySnapshot snap = snapshot.get();
+			var docs = snap.getDocuments();
+			for (QueryDocumentSnapshot doc : docs) {
+				if ((doc.get("username", String.class)).equals(username) && (doc.get("password", String.class)).equals(password)) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

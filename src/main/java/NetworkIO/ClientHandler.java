@@ -1,6 +1,7 @@
+package NetworkIO;
+
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class ClientHandler implements Runnable {
     private Socket socket;

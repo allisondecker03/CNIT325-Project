@@ -74,7 +74,7 @@ public class CreateAccountFrame extends JFrame implements ActionListener {
 			} else {
 				// Write new data to the database
 				HashMap<String, String> newUserData = new HashMap<>();
-				newUserData.put("username", username);
+				newUserData.put("username", username.toLowerCase().trim());
 				newUserData.put("name", name);
 				newUserData.put("password", String.valueOf(password.hashCode()));
 				FirebaseUtilities.createNewUser(newUserData);

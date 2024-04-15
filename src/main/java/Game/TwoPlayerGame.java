@@ -1,3 +1,5 @@
+package Game;
+
 /**
  * A class that represents a general two player game that can be played
  *

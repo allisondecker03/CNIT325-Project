@@ -1,6 +1,7 @@
 package Frames;
 
 import Firebase.FirebaseUtilities;
+import Game.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,12 +54,19 @@ public class LoginFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signInButton) {
             // Handle sign in button click
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
+            String username = usernameField.getText().toLowerCase().trim();
+            String password = String.valueOf(new String(passwordField.getPassword()).hashCode());
+            
+            if (FirebaseUtilities.userExists(username, password)) {
+                this.setVisible(false);
+                this.dispose();
+                new MenuFrame(new Player(username));
+            } else {
+                JOptionPane.showMessageDialog(this, "Incorrect login information", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else if (e.getSource() == createAccountButton) {
             this.setVisible(false);
             this.dispose();
-            FirebaseUtilities.getAllUsernames();
             new CreateAccountFrame();
         }
     }

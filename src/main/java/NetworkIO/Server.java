@@ -1,7 +1,7 @@
+package NetworkIO;
+
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Scanner;
 
 /**
  * A program that continuously accepts client connections and creates a new thread to handle each client.
@@ -21,7 +21,7 @@ public class Server {
         try {
             // Assign server socket to a port
             serverSocket = new ServerSocket(PORT_NUMBER);
-            System.out.println("Server started!");
+            System.out.println("NetworkIO.Server started!");
         } catch (Exception e) {
             // TODO: Better handling
             e.printStackTrace();

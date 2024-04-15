@@ -1,3 +1,5 @@
+package Game;
+
 import java.util.Set;
 /**
  * A class that represents a general n-player game that can be played

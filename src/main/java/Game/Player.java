@@ -1,3 +1,5 @@
+package Game;
+
 /**
  * A class that represents a user that is connected to the server playing games
  */
