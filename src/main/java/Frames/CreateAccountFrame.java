@@ -1,6 +1,7 @@
 package Frames;
 
 import Firebase.FirebaseUtilities;
+import User.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +18,7 @@ public class CreateAccountFrame extends JFrame implements ActionListener {
 	private JButton createAccountButton;
 	
 	public CreateAccountFrame() {
-		setTitle("Create Account");
+		setTitle(Client.languageBundle.getString("CAF_Title"));
 		setSize(300, 200);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); // Center the frame on screen
@@ -25,15 +26,15 @@ public class CreateAccountFrame extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(5, 2));
 		
-		JLabel nameLabel = new JLabel("Name:");
+		JLabel nameLabel = new JLabel(Client.languageBundle.getString("CAF_Name"));
 		nameField = new JTextField();
-		JLabel usernameLabel = new JLabel("Username:");
+		JLabel usernameLabel = new JLabel(Client.languageBundle.getString("CAF_Username"));
 		usernameField = new JTextField();
-		JLabel passwordLabel = new JLabel("Password:");
+		JLabel passwordLabel = new JLabel(Client.languageBundle.getString("CAF_Password"));
 		passwordField = new JPasswordField();
-		JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+		JLabel confirmPasswordLabel = new JLabel(Client.languageBundle.getString("CAF_Confirm_Password"));
 		confirmPasswordField = new JPasswordField();
-		createAccountButton = new JButton("Create Account");
+		createAccountButton = new JButton(Client.languageBundle.getString("CAF_Create_Account_Button"));
 		createAccountButton.addActionListener(this);
 		
 		panel.add(nameLabel);
@@ -63,13 +64,13 @@ public class CreateAccountFrame extends JFrame implements ActionListener {
 			
 			// Passwords must match
 			if (!password.equals(confirmPassword)) {
-				JOptionPane.showMessageDialog(this, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, Client.languageBundle.getString("CAF_Password_Mismatch"), Client.languageBundle.getString("CAF_Error_Title"), JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			
 			// Check if username already exists in the database
 			if (FirebaseUtilities.getAllUsernames().contains(username)) {
-				JOptionPane.showMessageDialog(this, "Username in use", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, Client.languageBundle.getString("CAF_Taken_Username"), Client.languageBundle.getString("CAF_Error_Title"), JOptionPane.ERROR_MESSAGE);
 				return;
 			} else {
 				// Write new data to the database

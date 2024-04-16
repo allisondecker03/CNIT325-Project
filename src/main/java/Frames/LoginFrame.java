@@ -2,6 +2,7 @@ package Frames;
 
 import Firebase.FirebaseUtilities;
 import Game.Player;
+import User.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ public class LoginFrame extends JFrame implements ActionListener {
     private JButton createAccountButton;
 
     public LoginFrame() {
-        setTitle("Login");
+        setTitle(Client.languageBundle.getString("LF_Title"));
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Center the frame on screen
@@ -23,13 +24,13 @@ public class LoginFrame extends JFrame implements ActionListener {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
-        JLabel usernameLabel = new JLabel("Username:");
+        JLabel usernameLabel = new JLabel(Client.languageBundle.getString("LF_Username"));
         usernameField = new JTextField();
-        JLabel passwordLabel = new JLabel("Password:");
+        JLabel passwordLabel = new JLabel(Client.languageBundle.getString("LF_Password"));
         passwordField = new JPasswordField();
-        signInButton = new JButton("Sign In");
+        signInButton = new JButton(Client.languageBundle.getString("LF_Sign_In"));
         signInButton.addActionListener(this);
-        createAccountButton = new JButton("Create Account");
+        createAccountButton = new JButton(Client.languageBundle.getString("LF_Create_Account"));
         createAccountButton.addActionListener(this);
 
         panel.add(usernameLabel);
@@ -62,7 +63,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                 this.dispose();
                 new MenuFrame(new Player(username));
             } else {
-                JOptionPane.showMessageDialog(this, "Incorrect login information", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, Client.languageBundle.getString("LF_Incorrect_Login"), Client.languageBundle.getString("LF_Error_Title"), JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == createAccountButton) {
             this.setVisible(false);
