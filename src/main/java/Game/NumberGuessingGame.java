@@ -1,3 +1,5 @@
+package Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -71,9 +73,5 @@ public class NumberGuessingGame extends JFrame {
                 feedbackLabel.setText("Too high! Try again.");
             }
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new NumberGuessingGame());
     }
 }
