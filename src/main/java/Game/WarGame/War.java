@@ -1,4 +1,4 @@
-package Game;
+package Game.WarGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,6 +61,7 @@ public class War extends JFrame {
 
         pack();
         setLocationRelativeTo(null); //center frame
+        setVisible(true);
     }
 
     //dealing cards to each player
@@ -116,14 +117,4 @@ public class War extends JFrame {
             System.exit(0); //exit
         }
     }
-
-    //starting the game
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            War game = new War();
-            game.setVisible(true);
-        });
-    }
-
 }
-

@@ -1,4 +1,4 @@
-package Game;
+package Game.WarGame;
 
 public class Card {
     //Enum for suits of cards

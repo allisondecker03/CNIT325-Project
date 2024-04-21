@@ -1,6 +1,7 @@
 package Frames;
 
 import Game.Player;
+import Game.WarGame.War;
 import User.Client;
 
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(5, 1));
 		
-		game1Button = new JButton("Game.Game 1");
+		game1Button = new JButton("War Card Game");
 		game1Button.addActionListener(this);
 		game2Button = new JButton("Game.Game 2");
 		game2Button.addActionListener(this);
@@ -65,8 +66,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == game1Button) {
-			// Open Game.Game 1
-			JOptionPane.showMessageDialog(this, "Opening Game.Game 1");
+			War warGame = new War();
 		} else if (e.getSource() == game2Button) {
 			// Open Game.Game 2
 			JOptionPane.showMessageDialog(this, "Opening Game.Game 2");
