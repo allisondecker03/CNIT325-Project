@@ -1,0 +1,147 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Minesweeper extends JFrame {
+    private JButton[][] buttons;
+    private int rows;
+    private int cols;
+    private int mines;
+    private int currentPlayer;
+    private int uncoveredCells;
+    private boolean gameOver;
+    private JLabel playerLabel;
+
+    public Minesweeper(int rows, int cols, int mines) {
+        this.rows = rows;
+        this.cols = cols;
+        this.mines = mines;
+        this.currentPlayer = 1;
+        this.uncoveredCells = 0;
+        this.gameOver = false;
+
+        setTitle("Minesweeper");
+        setSize(60 * cols, 60 * rows + 60);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        playerLabel = new JLabel("Player " + currentPlayer + "'s turn");
+        add(playerLabel, BorderLayout.NORTH);
+
+        JPanel boardPanel = new JPanel(new GridLayout(rows, cols));
+        buttons = new JButton[rows][cols];
+        initButtons(boardPanel);
+
+        add(boardPanel, BorderLayout.CENTER);
+
+        setVisible(true);
+    }
+
+    private void initButtons(JPanel boardPanel) {
+        List<Integer> minePositions = generateMinePositions(rows, cols, mines);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                JButton button = new JButton();
+                button.setPreferredSize(new Dimension(50, 50));
+                button.addActionListener(new ButtonClickListener(i, j));
+
+                if (minePositions.contains(i * cols + j)) {
+                    button.putClientProperty("isMine", true);
+                } else {
+                    button.putClientProperty("isMine", false);
+                }
+
+                buttons[i][j] = button;
+                boardPanel.add(button);
+            }
+        }
+    }
+
+    private List<Integer> generateMinePositions(int rows, int cols, int mines) {
+        List<Integer> positions = new ArrayList<>();
+        for (int i = 0; i < rows * cols; i++) {
+            positions.add(i);
+        }
+        Collections.shuffle(positions);
+        return positions.subList(0, mines);
+    }
+
+    private int countAdjacentMines(int row, int col) {
+        int count = 0;
+        for (int i = Math.max(0, row - 1); i <= Math.min(rows - 1, row + 1); i++) {
+            for (int j = Math.max(0, col - 1); j <= Math.min(cols - 1, col + 1); j++) {
+                if ((boolean) buttons[i][j].getClientProperty("isMine")) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private void uncoverCell(int row, int col) {
+        if (!(boolean) buttons[row][col].getClientProperty("isMine")) {
+            int count = countAdjacentMines(row, col);
+            buttons[row][col].setText(Integer.toString(count));
+            uncoveredCells++;
+        } else {
+            gameOver = true;
+            revealMines();
+            JOptionPane.showMessageDialog(this, "Player " + currentPlayer + " hit a mine! Game over!");
+            switchPlayer();
+        }
+
+        if (uncoveredCells == (rows * cols - mines)) {
+            JOptionPane.showMessageDialog(null, "Congratulations! It's a draw!");
+            gameOver = true;
+        } else {
+            switchPlayer();
+        }
+
+        updatePlayerLabel();
+    }
+
+    private void revealMines() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if ((boolean) buttons[i][j].getClientProperty("isMine")) {
+                    buttons[i][j].setText("*");
+                }
+            }
+        }
+    }
+
+    private void switchPlayer() {
+        currentPlayer = (currentPlayer == 1) ? 2 : 1;
+    }
+
+    private void updatePlayerLabel() {
+        playerLabel.setText("Player " + currentPlayer + "'s turn");
+    }
+
+    private class ButtonClickListener implements ActionListener {
+        private int row;
+        private int col;
+
+        public ButtonClickListener(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!gameOver) {
+                uncoverCell(row, col);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Minesweeper game = new Minesweeper(5, 5, 5); // Example: 5x5 board with 5 mines
+        });
+    }
+}
