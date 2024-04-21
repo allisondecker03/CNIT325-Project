@@ -1,6 +1,7 @@
 package Frames;
 
 import Game.Player;
+import Game.WordleGame;
 import User.Client;
 
 import javax.swing.*;
@@ -37,7 +38,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 		game2Button.addActionListener(this);
 		game3Button = new JButton("Game.Game 3");
 		game3Button.addActionListener(this);
-		game4Button = new JButton("Game.Game 4");
+		game4Button = new JButton("Wordle");
 		game4Button.addActionListener(this);
 		game5Button = new JButton("Game.Game 5");
 		game5Button.addActionListener(this);
@@ -74,8 +75,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 			// Open Game.Game 3
 			JOptionPane.showMessageDialog(this, "Opening Game.Game 3");
 		} else if (e.getSource() == game4Button) {
-			// Open Game.Game 4
-			JOptionPane.showMessageDialog(this, "Opening Game.Game 4");
+			WordleGame wordleGame = new WordleGame();
 		} else if (e.getSource() == game5Button) {
 			// Open Game.Game 5
 			JOptionPane.showMessageDialog(this, "Opening Game.Game 5");

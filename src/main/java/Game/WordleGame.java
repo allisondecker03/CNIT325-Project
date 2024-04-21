@@ -1,3 +1,5 @@
+package Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -92,9 +94,5 @@ public class WordleGame extends JFrame {
             usedLettersText.append(letter).append(" ");
         }
         usedLettersArea.setText(usedLettersText.toString());
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new WordleGame());
     }
 }
