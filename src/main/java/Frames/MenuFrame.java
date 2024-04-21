@@ -1,6 +1,7 @@
 package Frames;
 
 import Game.Player;
+import Game.RockPaperScissors.RockPaperScissors;
 import Game.WarGame.War;
 import User.Client;
 
@@ -34,7 +35,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 		
 		game1Button = new JButton("War Card Game");
 		game1Button.addActionListener(this);
-		game2Button = new JButton("Game.Game 2");
+		game2Button = new JButton("Rock Paper Scissors");
 		game2Button.addActionListener(this);
 		game3Button = new JButton("Game.Game 3");
 		game3Button.addActionListener(this);
@@ -68,8 +69,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 		if (e.getSource() == game1Button) {
 			War warGame = new War();
 		} else if (e.getSource() == game2Button) {
-			// Open Game.Game 2
-			JOptionPane.showMessageDialog(this, "Opening Game.Game 2");
+			RockPaperScissors rpsGame = new RockPaperScissors();
 		} else if (e.getSource() == game3Button) {
 			// Open Game.Game 3
 			JOptionPane.showMessageDialog(this, "Opening Game.Game 3");

@@ -1,3 +1,5 @@
+package Game.RockPaperScissors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,7 +12,7 @@ public class RockPaperScissors extends JFrame implements ActionListener {
     public RockPaperScissors() {
         setTitle("Rock Paper Scissors");
         setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         panel = new JPanel(new BorderLayout());
 
@@ -62,7 +64,7 @@ public class RockPaperScissors extends JFrame implements ActionListener {
         String computerChoice = generateComputerChoice();
         String result = determineWinner(userChoice, computerChoice);
 
-        resultLabel.setText( "You chose: " + userChoice    +  "  \nComputer chose:  " +  computerChoice +  " \n "+ result);
+        resultLabel.setText( "You chose: " + userChoice +  "  \nComputer chose:  " +  computerChoice +  " \n "+ result);
 
 
     if (result.equals("Tie"))
@@ -86,20 +88,8 @@ public class RockPaperScissors extends JFrame implements ActionListener {
         else if ((user.equals("Rock") && computer.equals("Scissors")) ||
                 (user.equals("Paper") && computer.equals("Rock")) ||
                 (user.equals("Scissors") && computer.equals("Paper")))
-
             return "You win";
         else
-
             return "Computer won";
     }
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            RockPaperScissors ggu = new RockPaperScissors();
-            ggu.setVisible(true);
-        });
-    }
 }
-
-
